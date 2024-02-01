@@ -1,4 +1,8 @@
 package service.member;
 
-public class MemberService {
+import base.service.BaseService;
+import model.Member;
+
+public interface MemberService extends BaseService<Integer, Member> {
+
 }

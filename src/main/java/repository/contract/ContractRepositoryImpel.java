@@ -3,12 +3,13 @@ package repository.contract;
 import base.repository.BaseRepositoryImpel;
 import model.Contract;
 
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class ContractRepositoryImpel extends BaseRepositoryImpel<Integer, Contract> implements ContractRepository {
+
+    public ContractRepositoryImpel(Connection connection) {
+        super(connection);
+    }
 
     @Override
     public String getTableName() {

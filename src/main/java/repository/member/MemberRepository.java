@@ -5,4 +5,6 @@ import model.Member;
 
 public interface MemberRepository extends BaseRepository<Integer, Member> {
 
+
+     boolean maxCoachSalary ();
 }
