@@ -14,17 +14,13 @@ import java.util.Date;
 @FieldDefaults(level=AccessLevel.PRIVATE)
 public class Contract extends BaseEntity<Integer> {
     int memberId ;
-    Date startDate;
-    Date endDate;
+    int semesterId;
     int salary;
 
-
-
-    public Contract(Integer id, int memberId, Date startDate, Date endDate, int salary) {
-        super(id);
+    public Contract(Integer integer, int memberId, int semesterId, int salary) {
+        super(integer);
         this.memberId = memberId;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.semesterId = semesterId;
         this.salary = salary;
     }
 }

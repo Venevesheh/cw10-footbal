@@ -64,8 +64,7 @@ create table if not exists contract
 (
     id         serial primary key,
     member_id  int references member (id),
-    start_date date,
-    end_date   date,
+    semester_id int references semester(id),
     salary     int
 );
 
