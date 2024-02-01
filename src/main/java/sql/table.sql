@@ -21,9 +21,8 @@ create table if not exists semester
     id         serial primary key,
     start_date date,
     end_date   date
-
-
 );
+
 create table if not exists matches
 (
     id               serial primary key,

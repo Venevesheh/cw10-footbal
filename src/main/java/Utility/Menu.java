@@ -18,15 +18,7 @@ public class Menu {
     }
 
     public void CoachMaxSalary(){
-        try {
-            ResultSet resultSet = memberService.maxCoachsalary();
-            while (resultSet.next()) {
-                System.out.print(resultSet.getString("name") + " | ");
-                System.out.println(resultSet.getInt("salary") + " | ");
-            }
-        } catch (SQLException e){
-            System.out.println(e.getMessage());
-        }
+
     }
 
 }
