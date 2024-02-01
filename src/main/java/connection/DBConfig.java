@@ -10,7 +10,7 @@ public class DBConfig {
             try {
                 connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres",
                         "postgres",
-                        "13572468");
+                        "kimia314161");
             } catch (SQLException e) {
                 System.out.println("not found url");
             }

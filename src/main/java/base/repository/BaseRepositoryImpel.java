@@ -44,6 +44,6 @@ public abstract class BaseRepositoryImpel < ID extends Serializable, TYPE extend
     public abstract String getTableName();
     public abstract String getColumnName();
     public abstract String getCountOfQMarks();
-    public abstract String fillPAramForPS(PreparedStatement preparedStatement,TYPE entity, Boolean isCountOnly );
+    public abstract void fillPAramForPS(PreparedStatement preparedStatement,TYPE entity, Boolean isCountOnly );
 public abstract TYPE mapResultsetToEntity (ResultSet resultSet);
 }
