@@ -1,5 +1,4 @@
-create table if not exists city
-(
+create table if not exists city(
     id   serial primary key,
     name varchar(100)
 );
@@ -71,6 +70,9 @@ create table if not exists contract
     salary     int
 );
 
+--the query of coach's maximum salary
+select m.name ,salary from member m,contract c
+where c.member_id =m.id and c.salary=(select max(salary ) from contract );
 
 
 

@@ -36,9 +36,6 @@ public class ContractRepositoryImpel extends BaseRepositoryImpel<Integer, Contra
         } catch (SQLException e){
             System.out.println(e.getMessage());
         }
-
-
-
     }
 
     @Override
@@ -49,8 +46,7 @@ public class ContractRepositoryImpel extends BaseRepositoryImpel<Integer, Contra
             contract.setMemberId(resultSet.getInt("member_id"));
             contract.setStartDate(resultSet.getDate("start_date"));
             contract.setEndDate(resultSet.getDate("end_date"));
-
-
+            contract.setSalary(resultSet.getInt("salary"));
         }catch (SQLException e ){
             System.out.println(e.getMessage());
         }

@@ -18,6 +18,19 @@ public class MemberRepositoryImpel extends BaseRepositoryImpel<Integer, Member> 
         super(connection);
     }
 
+    @Override
+    public ResultSet maxCoachSalary() {
+        String sql = "select m.name ,salary from " + getTableName() + " m,contract c" +
+                " where c.member_id =m.id and c.salary=(select max(salary ) from contract );";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return resultSet;
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
 
     @Override
     public String getTableName() {
@@ -40,8 +53,6 @@ public class MemberRepositoryImpel extends BaseRepositoryImpel<Integer, Member> 
             preparedStatement.setString(1, entity.getName());
             preparedStatement.setString(2,entity.getRole());
             preparedStatement.setInt(3,entity.getTeamId());
-
-
         }catch (SQLException e ){
             System.out.println(e.getMessage());
         }
