@@ -17,4 +17,5 @@ public class City extends BaseEntity<Integer> {
         super(id);
         this.name = name;
     }
+
 }
