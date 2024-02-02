@@ -30,9 +30,8 @@ public class ContractRepositoryImpel extends BaseRepositoryImpel<Integer, Contra
     public void fillPAramForPS(PreparedStatement preparedStatement, Contract entity, Boolean isCountOnly) {
         try {
             preparedStatement.setInt(1,entity.getMemberId());
-            preparedStatement.setDate(2, (Date) entity.getStartDate());
-            preparedStatement.setDate(3, (Date) entity.getEndDate());
-            preparedStatement.setInt(4,entity.getSalary());
+            preparedStatement.setInt(2,entity.getSemesterId());
+            preparedStatement.setInt(3,entity.getSalary());
         } catch (SQLException e){
             System.out.println(e.getMessage());
         }
@@ -44,8 +43,7 @@ public class ContractRepositoryImpel extends BaseRepositoryImpel<Integer, Contra
         try {
             contract.setId(resultSet.getInt("id"));
             contract.setMemberId(resultSet.getInt("member_id"));
-            contract.setStartDate(resultSet.getDate("start_date"));
-            contract.setEndDate(resultSet.getDate("end_date"));
+            contract.setSemesterId(resultSet.getInt("semester_id"));
             contract.setSalary(resultSet.getInt("salary"));
         }catch (SQLException e ){
             System.out.println(e.getMessage());
