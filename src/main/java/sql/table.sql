@@ -95,4 +95,8 @@ where m.id = c.member_id
                                     where m2.role = 'player'
                                     group by c.semester_id);
 
---
+--Q3 فهرست شهر و تعداد تیم های هر کدام
+select city.name, count(t.id)
+from city
+         join team t on city.id = t.city_id
+group by city.name;

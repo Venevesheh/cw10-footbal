@@ -1,5 +1,6 @@
 package Utility;
 
+import service.city.CityService;
 import service.contract.ContractService;
 import service.member.MemberService;
 
@@ -10,15 +11,19 @@ public class Menu {
     private final ContractService contractService = ApplicationContext.getContractServiceImpel();
     private final MemberService memberService = ApplicationContext.getMemberServiceImpel();
 
+    private final CityService cityService = ApplicationContext.getCityServiceImpel();
     public Menu() {
     }
 
     public void MainMenu(){
-        PlayerMaxSalary();
+        CountOfTeamsInCit();
     }
 
     public void CoachMaxSalary(){ memberService.maxCoachsalary();}
 
     public void PlayerMaxSalary() {memberService.maxPlayerInSemester();}
+
+    public void CountOfTeamsInCit(){cityService.CountOfTeamsInCit();}
+
 
 }
