@@ -3,6 +3,7 @@ package repository.member;
 import base.model.BaseEntity;
 import base.repository.BaseRepository;
 import base.repository.BaseRepositoryImpel;
+import lombok.extern.java.Log;
 import model.Member;
 import service.member.MemberServiceImpel;
 
@@ -12,7 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class MemberRepositoryImpel extends BaseRepositoryImpel<Integer, Member> implements MemberRepository{
+public class MemberRepositoryImpel extends BaseRepositoryImpel<Integer, Member> implements MemberRepository {
 
     public MemberRepositoryImpel(Connection connection) {
         super(connection);
@@ -27,7 +28,7 @@ public class MemberRepositoryImpel extends BaseRepositoryImpel<Integer, Member> 
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();
             return resultSet;
-        } catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return null;
@@ -52,25 +53,45 @@ public class MemberRepositoryImpel extends BaseRepositoryImpel<Integer, Member> 
     public void fillPAramForPS(PreparedStatement preparedStatement, Member entity, Boolean isCountOnly) {
         try {
             preparedStatement.setString(1, entity.getName());
-            preparedStatement.setString(2,entity.getRole());
-            preparedStatement.setInt(3,entity.getTeamId());
-        }catch (SQLException e ){
+            preparedStatement.setString(2, entity.getRole());
+            preparedStatement.setInt(3, entity.getTeamId());
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
 
     @Override
     public Member mapResultsetToEntity(ResultSet resultSet) {
-        Member member=new Member();
+        Member member = new Member();
         try {
             member.setId(resultSet.getInt("id"));
             member.setName(resultSet.getString("name"));
             member.setRole(resultSet.getString("role"));
             member.setTeamId(resultSet.getInt("team_id"));
-        }catch (SQLException e ){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return member;
 
+    }
+
+    public ResultSet maxPlayerInSemester() {
+        ResultSet resultSet = null;
+        String string = "select m.role, m.name, c.salary, c.semester_id\n" +
+                " from member m,\n" +
+                " contract c\n" +
+                " where m.id = c.member_id\n" +
+                " and (c.salary, c.semester_id) in (select max(salary), c.semester_id\n" +
+                " from contract c\n" +
+                " join member m2 on m2.id = c.member_id\n" +
+                " where m2.role = 'player'\n" +
+                " group by c.semester_id)";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(string)) {
+            resultSet = preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return resultSet;
     }
 }

@@ -7,4 +7,5 @@ import java.sql.ResultSet;
 
 public interface MemberRepository extends BaseRepository<Integer, Member> {
      ResultSet maxCoachSalary();
+     ResultSet maxPlayerInSemester();
 }
