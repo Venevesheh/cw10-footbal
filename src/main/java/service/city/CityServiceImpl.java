@@ -1,12 +1,9 @@
 package service.city;
 
-import base.model.BaseEntity;
-import base.service.BaseService;
+
 import base.service.BaseServiceImpel;
 import model.City;
 import repository.city.CityRepository;
-
-import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
