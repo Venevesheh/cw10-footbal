@@ -14,11 +14,11 @@ public class Menu {
     }
 
     public void MainMenu(){
-        CoachMaxSalary();
+        PlayerMaxSalary();
     }
 
-    public void CoachMaxSalary(){
+    public void CoachMaxSalary(){ memberService.maxCoachsalary();}
 
-    }
+    public void PlayerMaxSalary() {memberService.maxPlayerInSemester();}
 
 }

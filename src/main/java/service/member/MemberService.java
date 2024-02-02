@@ -8,4 +8,5 @@ import java.sql.ResultSet;
 public interface MemberService extends BaseService<Integer, Member> {
 
     void maxCoachsalary();
+    void maxPlayerInSemester();
 }

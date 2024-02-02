@@ -87,11 +87,13 @@ public class MemberRepositoryImpel extends BaseRepositoryImpel<Integer, Member> 
                 " where m2.role = 'player'\n" +
                 " group by c.semester_id)";
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement(string)) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(string);
             resultSet = preparedStatement.executeQuery();
+            return resultSet;
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("this is repo "+e.getMessage());
+            return null;
         }
-        return resultSet;
     }
 }
