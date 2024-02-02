@@ -20,8 +20,9 @@ public class MemberRepositoryImpel extends BaseRepositoryImpel<Integer, Member> 
 
     @Override
     public ResultSet maxCoachSalary() {
-        String sql = "select m.name ,salary from " + getTableName() + " m,contract c" +
-                " where c.member_id =m.id and c.salary=(select max(salary ) from contract );";
+        String sql = "select m.role,m.name,c.salary from member m,contract c\n" +
+                "where m.id=c.member_id  and c.salary=(select max(salary ) from contract c\n" +
+                "    join member m2 on m2.id = c.member_id where m2.role = 'coach')  ;";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();

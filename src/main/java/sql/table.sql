@@ -74,3 +74,99 @@ where c.member_id =m.id and c.salary=(select max(salary ) from contract );
 
 
 
+--the query of coach's maximum salary
+select m.role, m.name, c.salary
+from member m,
+     contract c
+where m.id = c.member_id
+  and c.salary = (select max(salary)
+                  from contract c
+                           join member m2 on m2.id = c.member_id
+                  where m2.role = 'player');
+
+
+
+select m.name, c.salary, c.semester_id, m.role
+from contract c,
+     member m
+where m.id = c.member_id
+  and (c.semester_id, c.salary)
+    in (select c.semester_id, max(salary)
+        from contract c,
+             member m2
+        where m2.role = 'player'
+        group by c.semester_id, c.salary
+        having c.salary = max(c.salary));
+
+
+select m.name, c.salary, c.semester_id, m.role
+from contract c,
+     member m
+where m.id = c.member_id
+  and (c.semester_id, c.salary)
+    in (select c.semester_id,
+               max(salary)
+        from contract c,
+             member m2
+        where c.salary = (select max(c.salary)
+                          from contract c,
+                               member m
+                          where m.role = 'player')
+        group by c.semester_id);
+
+
+
+(select c.salary
+ from contract c,
+      member m
+ where m.role = 'player');
+
+
+select m.name, c.salary, c.semester_id, m.role
+from contract c,
+     member m
+where m.id = c.member_id
+  and (c.semester_id, c.salary)
+    in (select c.semester_id,
+               max(salary)
+        from contract c,
+             member m2
+        group by c.semester_id);
+
+
+
+select m.name, c.salary, c.semester_id, m.role
+from contract c,
+     member m
+where m.role = 'player'
+  and c.member_id = m.id
+  and c.salary = (select max(salary) from contract)
+
+
+select m.role, m.name, c.salary,c.semester_id
+from member m,
+     contract c,
+     semester s
+where m.id = c.member_id
+  and c.salary = (select max(salary)
+                  from contract c
+                           join member m2 on m2.id = c.member_id
+                           join  semester s2 on c.semester_id = s2.id
+                  where m2.role = 'player');
+
+
+
+select m.role, m.name, c.salary, c.semester_id
+from member m,
+     contract c
+where m.id = c.member_id
+  and c.salary = (select max(salary)
+                  from contract c
+                           join member m2 on m2.id = c.member_id
+                  where m2.role = 'player'
+                    and c.semester_id in (1, 2))
+
+
+group by c.semester_id, m.name, c.salary, m.role;
+
+
